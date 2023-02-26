@@ -1,6 +1,6 @@
 # MengRain & Coldvvater-Config   (Stash)
 # Date:2022.10.5
-# 最后一次更新于：2022.12.21
+# 最后一次更新于：2023.02.26
 # Author: MengRain  （我的TG频道：https://t.me/mengyulianmian  可从频道进群交流）
 # 下载配置后,请手动添加机场订阅
 # 找到 {远程订阅} 部分，将MyProxy 部分的 url替换为自己的机场订阅链接  
@@ -229,6 +229,12 @@ proxy-groups:
     proxies:
       *G
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+
+  - name: Clubhouse
+    type: select
+    proxies:
+      *G
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Clubhouse_1.png
   
   - name: Twitter
     type: select
@@ -277,6 +283,12 @@ proxy-groups:
     proxies:
       *G
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Weibo.png
+
+  - name: ChatGPT
+    type: select
+    proxies:
+      *G
+    icon: https://gitlab.com/lodepuly/iconlibrary/-/raw/master/Website_icon/80px/OpenAI.png
   
   - name: 中国大陆
     type: select
@@ -302,6 +314,12 @@ proxy-groups:
 
 #远程规则集合
 rule-providers:
+
+  ChatGPT-rules:
+    behavior: classical
+    interval: 86400
+    name: ChatGPT
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/RuleSet/OpenAI.yaml
     
   Netflix-rules:
     behavior: classical
@@ -433,10 +451,11 @@ rule-providers:
     behavior: classical
     interval: 86400
     name: ASN
-    url: https://raw.githubusercontent.com/Coldvvater/Clash/master/RuleSet/ASN_China.yaml
+    url: https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Stash/RuleSet/ASN_China.yaml
 
 #分流规则引用
 rules:
+  - RULE-SET,ChatGPT-rules,ChatGPT
   - RULE-SET,Netflix-rules,Netflix
   - RULE-SET,Disney-rules,Disney+
   - RULE-SET,HBO-rules,HBO
@@ -445,8 +464,8 @@ rules:
   - RULE-SET,TikTok-rules,TikTok
   - RULE-SET,Bilibili-rules,Bilibili
   - RULE-SET,Telegram-rules,Telegram
-  - RULE-SET,Clubhouse-rules,国外媒体
-  - RULE-SET,ClubhouseIP-rules,国外媒体
+  - RULE-SET,Clubhouse-rules,Clubhouse
+  - RULE-SET,ClubhouseIP-rules,Clubhouse
   - RULE-SET,Twitter-rules,Twitter
   - RULE-SET,Speedtest-rules,Speedtest
   - RULE-SET,PayPal-rules,PayPal
@@ -455,10 +474,10 @@ rules:
   - RULE-SET,Google-rules,Google
   - RULE-SET,Microsoft-rules,Microsoft
   - RULE-SET,Weibo-rules,Weibo
-  #- RULE-SET,Mainland-rules,中国大陆
-  #- RULE-SET,MainlandIP-rules,中国大陆
+  - RULE-SET,Mainland-rules,中国大陆
+  - RULE-SET,MainlandIP-rules,中国大陆
   - RULE-SET,Global-rules,Proxy
-# ⚠注意：本配置目前主流使用ASN规则作为中国大陆分流，如不想使用，请在ASN规则前面加#号注释，同时把Mainland-rules、MainlandIP-rules及GEOIP前面的#号删除放行使其生效。
-  - RULE-SET,ASN-rules,DIRECT
-  #- GEOIP,CN,DIRECT
+# ASN China 规则，如需自行删除注释启用，同时把Mainland-rules、MainlandIP-rules及GEOIP注释。
+  #- RULE-SET,ASN-rules,DIRECT
+  - GEOIP,CN,DIRECT
   - MATCH,漏网之鱼
